@@ -1,0 +1,1 @@
+export const PRISMA_UNIQUE_KEY_EXCEPTION = "P2002";

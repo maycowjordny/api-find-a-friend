@@ -28,14 +28,12 @@ export class PetRegisterUseCase {
         toAdopt,
         typeName,
       } = body;
-      console.log(body);
 
-      /*   const ble = await this.petRepository.petType({
+      const ble = await this.petRepository.petType({
         name: typeName,
       });
-      console.log(ble);
- */
-      const bla = await this.petRepository.create({
+
+      await this.petRepository.create({
         name,
         description,
         age,
@@ -44,12 +42,11 @@ export class PetRegisterUseCase {
         idependenceLevels,
         enviroment,
         toAdopt,
-        typeId: "d5f5be65-019b-43c8-8511-b23d58cd7be1",
-        organizationId: "d5f5be65-019b-43c8-8511-b23d58cd7be1",
+        typeId: ble.id,
+        organizationId: "",
       });
-      console.log(bla);
-
-      return { bla };
-    } catch (err: any) {}
+    } catch (err: any) {
+      throw new Error(`Cannot create user with error: ${err.message}`);
+    }
   }
 }
