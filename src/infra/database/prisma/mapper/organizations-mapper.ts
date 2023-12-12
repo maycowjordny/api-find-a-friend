@@ -5,9 +5,11 @@ export function convertToPrisma(
   data: OrganizationModel
 ): Prisma.OrganizationUncheckedCreateInput {
   const organizationPrisma: Prisma.OrganizationUncheckedCreateInput = {
+    id: data.id,
+    userId: data.userId,
+    addressId: data.addressId,
     name: data.name,
     phone: data.phone,
-    userId: data.userId,
   };
 
   return organizationPrisma;
@@ -16,9 +18,10 @@ export function convertToPrisma(
 export function convertToDomain(data: RawOrganization): OrganizationModel {
   const organization: OrganizationModel = {
     id: data.id,
+    userId: data.userId,
+    addressId: data.addressId,
     name: data.name,
     phone: data.phone,
-    userId: data.userId,
     createdAt: data.createdAt,
   };
 

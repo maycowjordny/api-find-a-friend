@@ -1,4 +1,4 @@
-import { expect, describe, it, vi } from "vitest";
+import { expect, describe, it, vi, beforeEach } from "vitest";
 import { RegisterUseCase } from "./user-register";
 import { compare } from "bcryptjs";
 import { UserTypesEnum } from "@/application/enum/user-enum";
@@ -6,14 +6,21 @@ import { InMemoryUserRepository } from "@/infra/database/in-memory-repository/in
 import { UserAlreadyExistsError } from "@/application/errors/user-already-exists-error";
 import { PRISMA_UNIQUE_KEY_EXCEPTION } from "@/infra/database/prisma/constants/prisma-constants";
 
+let usersRepository: InMemoryUserRepository;
+let sut: RegisterUseCase;
+
 describe("Register Use Case", () => {
   const userRepositoryMock = {
     create: vi.fn(),
+    findByEmail: vi.fn(),
   };
 
+  beforeEach(() => {
+    usersRepository = new InMemoryUserRepository();
+    sut = new RegisterUseCase(usersRepository);
+  });
+
   it("should be able to create user", async () => {
-    const inMemoryUserRepository = new InMemoryUserRepository();
-    const registerUseCase = new RegisterUseCase(inMemoryUserRepository);
     const mockUser = {
       name: "John Doe",
       email: "johndoe@example.com",
@@ -21,7 +28,7 @@ describe("Register Use Case", () => {
       type: UserTypesEnum.ADOPTER,
     };
 
-    const { user } = await registerUseCase.execute(mockUser);
+    const { user } = await sut.execute(mockUser);
 
     expect(user).toMatchObject({
       id: expect.any(String),
@@ -33,10 +40,7 @@ describe("Register Use Case", () => {
   });
 
   it("should has user password upon registration", async () => {
-    const inMemoryUserRepository = new InMemoryUserRepository();
-    const registerUseCase = new RegisterUseCase(inMemoryUserRepository);
-
-    const { user } = await registerUseCase.execute({
+    const { user } = await sut.execute({
       name: "John Doe",
       email: "johndoe@example.com",
       password: "123456",

@@ -1,6 +1,5 @@
-import { Pet, PetType, Prisma } from "@prisma/client";
+import { Pet } from "@/application/interfaces/pet";
 
 export interface PetsRepository {
-  create(data: Prisma.PetUncheckedCreateInput): Promise<Pet>;
-  petType(data: Prisma.PetTypeCreateInput): Promise<PetType>;
+  create(data: Pet): Promise<Pet>;
 }

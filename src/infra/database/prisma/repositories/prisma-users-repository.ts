@@ -11,4 +11,14 @@ export class PrismaUsersRepository implements UsersRepository {
 
     return convertToDomain(user);
   }
+
+  async findByEmail(email: string): Promise<User | null> {
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    return user && convertToDomain(user);
+  }
 }

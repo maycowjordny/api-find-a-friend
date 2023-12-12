@@ -1,18 +1,13 @@
-import { Prisma } from "@prisma/client";
 import { PetsRepository } from "../../repositories/pets-abstract";
 import { prisma } from "../../lib/prisma";
+import { Pet } from "@/application/interfaces/pet";
+import { convertToDomain, convertToPrisma } from "../mapper/pet-mapper";
 
 export class PrismaPetsRepository implements PetsRepository {
-  async create(data: Prisma.PetUncheckedCreateInput) {
+  async create(data: Pet): Promise<Pet> {
     const pet = await prisma.pet.create({
-      data,
+      data: convertToPrisma(data),
     });
-    return pet;
-  }
-  async petType(data: Prisma.PetTypeCreateInput) {
-    const pet = await prisma.petType.create({
-      data,
-    });
-    return pet;
+    return convertToDomain(pet);
   }
 }

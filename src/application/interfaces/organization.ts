@@ -1,5 +1,6 @@
 export interface Organization {
-  id?: string | undefined;
+  id?: string;
+  addressId: string;
   userId: string;
   name: string;
   phone: string;

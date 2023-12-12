@@ -36,31 +36,30 @@ model User {
 
 model Organization {
   id        String   @id @default(uuid()) @map("IDT_ORGANIZATION")
+  addressId String   @unique @map("IDT_ADDRESS")
   userId    String   @unique @map("IDT_USER")
   name      String   @map("NAM_NAME")
   phone     String   @map("DES_PHONE")
   createdAt DateTime @default(now()) @map("DAT_CREATED")
   user      User     @relation(fields: [userId], references: [id])
-  Address   Address?
+  Address   Address  @relation(fields: [addressId], references: [id])
   Pet       Pet[]
 
   @@map("ORGANIZATION")
 }
 
 model Address {
-  id             String       @id @default(uuid()) @map("IDT_ADRESS")
-  organizationId String       @unique @map("IDT_ORGANIZATION")
-  name           String       @map("NAM_NAME")
-  postalCode     String       @map("DES_POSTALCODE")
-  uf             String       @map("DES_UF")
-  country        String       @map("DES_COUNTRY")
-  city           String       @map("DES_CITY")
-  province       String       @map("DES_PROVINCY")
-  neighbourhood  String       @map("DES_NEIGHBOURHOOD")
-  lat            String       @map("NUM_LAT")
-  lng            String       @map("NUM_LNG")
-  createdAt      DateTime     @default(now()) @map("DAT_CREATED")
-  organization   Organization @relation(fields: [organizationId], references: [id])
+  id            String        @id @default(uuid()) @map("IDT_ADRESS")
+  postalCode    String        @map("DES_POSTALCODE")
+  uf            String        @map("DES_UF")
+  country       String        @map("DES_COUNTRY")
+  city          String        @map("DES_CITY")
+  province      String        @map("DES_PROVINCY")
+  neighbourhood String        @map("DES_NEIGHBOURHOOD")
+  lat           String        @map("NUM_LAT")
+  lng           String        @map("NUM_LNG")
+  createdAt     DateTime      @default(now()) @map("DAT_CREATED")
+  organization  Organization?
 
   @@map("ADRESS")
 }
@@ -99,7 +98,7 @@ model Pet {
   size              PetSize               @map("IND_SIZE")
   energyLevels      PetEnergyLevels       @map("IND_ENERGY_LEVELS")
   idependenceLevels PetIdenpendenceLevels @map("IND_INDEPENDENCE_LEVELS")
-  enviroment        PetEnvironment        @map("IND_ENVIRONMENT")
+  environment       PetEnvironment        @map("IND_ENVIRONMENT")
   toAdopt           Boolean               @map("FLG_TO_ADOPT")
   createdAt         DateTime              @default(now()) @map("DAT_CREATED")
 
