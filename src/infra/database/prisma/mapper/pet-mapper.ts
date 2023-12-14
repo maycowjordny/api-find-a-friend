@@ -16,7 +16,7 @@ import {
 export function convertToPrisma(
   data: PetModel
 ): Prisma.PetUncheckedCreateInput {
-  const userPrisma: Prisma.PetUncheckedCreateInput = {
+  const petPrisma: Prisma.PetUncheckedCreateInput = {
     name: data.name,
     age: data.age,
     description: data.description,
@@ -31,11 +31,11 @@ export function convertToPrisma(
     size: PetEnumSize[data.size] as PetSize,
   };
 
-  return userPrisma;
+  return petPrisma;
 }
 
 export function convertToDomain(data: RawPet): PetModel {
-  const user: PetModel = {
+  const pet: PetModel = {
     id: data.id,
     name: data.name,
     age: data.age,
@@ -50,5 +50,5 @@ export function convertToDomain(data: RawPet): PetModel {
     createdAt: data.createdAt,
   };
 
-  return user;
+  return pet;
 }

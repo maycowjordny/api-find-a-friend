@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { AuthenticateValidator } from "../validator/authenticate/authenticate-validator";
+import { AuthenticateValidator } from "../../validator/authenticate/authenticate-validator";
 import { InvalidCredentialsError } from "@/application/errors/invalid-credentials-error";
-import { makeAuthenticateUseCase } from "@/application/use-cases/factories/make-authenticate-use-case";
+import { makeAuthenticateUseCase } from "@/application/use-cases/factories/authenticate/make-authenticate-use-case";
 
 export async function authenticate(
   request: FastifyRequest,
@@ -10,7 +10,6 @@ export async function authenticate(
   try {
     const authenticateValidator = await validate();
     const registerUseCase = makeAuthenticateUseCase();
-
     await registerUseCase.execute(authenticateValidator);
 
     return reply

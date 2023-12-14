@@ -29,6 +29,39 @@ export interface PetBody {
   environment: PetEnumEnviroment;
   idependenceLevels: PetEnumIndependenceLevels;
   size: PetEnumSize;
+  pictures: string[];
+  requirements: string[];
   typeId: string;
   toAdopt: boolean;
+}
+
+export interface GetPet {
+  skip: number;
+  take: number;
+  energyLevels?: PetEnumEnergyLevels;
+  age?: number;
+  size?: PetEnumSize;
+  uf: string;
+  city: string;
+  idependenceLevels?: PetEnumIndependenceLevels;
+}
+[];
+
+export interface Pagination {
+  skip: number;
+  total: number;
+  take: number;
+}
+
+export interface PetsToAdopt {
+  pets: Pet[];
+  pagination: Pagination;
+}
+
+export interface FindPetById {
+  id?: string | undefined;
+}
+
+export interface FindByidUseCaseRequest {
+  id: string;
 }

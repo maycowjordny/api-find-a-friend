@@ -1,3 +1,4 @@
+import { Organization } from "../interfaces/organization";
 import { AddressCreateUseCaseRequest } from "./address-types";
 
 export type OrganizationRegisterUseCaseRequest = {
@@ -8,9 +9,7 @@ export type OrganizationRegisterUseCaseRequest = {
 };
 
 export type OrganizationRegisterUseCaseResponse = {
-  userId: string;
-  name: string;
-  phone: string;
+  organization: Organization;
 };
 
 export type Body = {

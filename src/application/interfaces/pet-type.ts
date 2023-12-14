@@ -1,5 +1,5 @@
 export interface PetType {
-  id?: string | undefined;
+  id?: string;
   name: string;
-  createdAt?: string | Date | undefined;
+  createdAt?: Date;
 }

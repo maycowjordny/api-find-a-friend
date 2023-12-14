@@ -20,18 +20,15 @@ export class OrganizationCreateUseCase {
       const addressUseCase = new AddressCreateUseCase(addressRepository);
 
       const address = await addressUseCase.execute(body.address);
-      console.log(address);
-
-      if (!address?.id) throw new Error("Address is not defined");
 
       const organization = await this.organizationRepository.create({
-        addressId: address.id,
+        addressId: address.id!,
         userId,
         name,
         phone,
       });
 
-      return organization;
+      return { organization };
     } catch (err: any) {
       throw new Error(`Cannot create organization with error: ${err.message}`);
     }

@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { PetTypeValidatorRepository } from "../validator/petType/pet-type-validator";
-import { makeCreatePetTypeUseCase } from "@/application/use-cases/factories/make-pet-type-use-case";
+import { PetTypeValidatorRepository } from "../../validator/petType/pet-type-validator";
+import { makeCreatePetTypeUseCase } from "@/application/use-cases/factories/pet-type/make-pet-type-use-case";
 
 export async function petTypeCreate(
   request: FastifyRequest,

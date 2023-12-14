@@ -1,7 +1,7 @@
 import { UserAlreadyExistsError } from "@/application/errors/user-already-exists-error";
 import { FastifyReply, FastifyRequest } from "fastify";
-import { ValidatorRepository } from "../validator/user/user-validator";
-import { makeCreateUserUseCase } from "@/application/use-cases/factories/make-user-use-case";
+import { ValidatorRepository } from "../../validator/user/user-validator";
+import { makeCreateUserUseCase } from "@/application/use-cases/factories/user/make-user-use-case";
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {
   try {

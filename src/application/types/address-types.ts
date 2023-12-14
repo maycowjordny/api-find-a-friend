@@ -1,5 +1,3 @@
-import { Address } from "../interfaces/address";
-
 export type AddressCreateUseCaseRequest = {
   city: string;
   country: string;

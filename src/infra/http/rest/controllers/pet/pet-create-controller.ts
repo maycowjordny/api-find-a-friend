@@ -1,14 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { PetValidatorRepository } from "../validator/pet/pet-validator";
-import { makeCreatePetUseCase } from "@/application/use-cases/factories/make-pet-use-case";
-import {
-  PetEnumEnergyLevels,
-  PetEnumEnviroment,
-  PetEnumIndependenceLevels,
-  PetEnumSize,
-} from "@/application/enum/pet-enum";
+import { PetValidatorRepository } from "../../validator/pet/pet-validator";
 import { PetBody } from "@/application/interfaces/pet";
-import { makePictureUseCase } from "@/application/use-cases/factories/make-picture-use-case";
+import { makeCreatePetUseCase } from "@/application/use-cases/factories/pet/make-pet-use-case";
 
 export async function petRegister(
   request: FastifyRequest,
@@ -23,14 +16,7 @@ export async function petRegister(
 
     const petUseCase = makeCreatePetUseCase();
 
-    const { pet } = await petUseCase.execute(petValidator);
-
-    const pictureUseCase = makePictureUseCase();
-
-    await pictureUseCase.execute({
-      petId: pet.id,
-      pictures: { picture: [] },
-    });
+    await petUseCase.execute(petValidator);
 
     return reply.status(201).send({ message: "Pet created successfully!" });
   } catch (err: any) {
@@ -53,6 +39,8 @@ export async function petRegister(
       size: petBody.size,
       typeId: petBody.typeId,
       toAdopt: petBody.toAdopt,
+      pictures: petBody.pictures,
+      requirements: petBody.requirements,
     };
 
     const pet = await petValidatorRepository.petValidator(newBody);

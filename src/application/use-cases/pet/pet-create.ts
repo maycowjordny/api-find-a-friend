@@ -3,6 +3,8 @@ import {
   PetRegisterUseCaseResponse,
 } from "@/application/types/pet-types";
 import { PetsRepository } from "@/infra/database/repositories/pets-abstract";
+import { makePictureUseCase } from "../factories/picture/make-picture-use-case";
+import { makeRequirementUseCase } from "../factories/requirement/make-requeriment-use-case";
 
 export class PetRegisterUseCase {
   constructor(private petRepository: PetsRepository) {}
@@ -21,6 +23,8 @@ export class PetRegisterUseCase {
         toAdopt,
         organizationId,
         typeId,
+        pictures,
+        requirements,
       } = body;
 
       const pet = await this.petRepository.create({
@@ -35,6 +39,24 @@ export class PetRegisterUseCase {
         typeId,
         organizationId,
       });
+
+      const pictureUseCase = makePictureUseCase();
+      const requirementeUseCase = makeRequirementUseCase();
+
+      if (!pet.id) throw new Error("PetId is not defined");
+
+      const newPictures = {
+        petId: pet.id,
+        pictures,
+      };
+
+      const newRequirement = {
+        petId: pet.id,
+        descriptions: requirements,
+      };
+
+      await pictureUseCase.execute(newPictures);
+      await requirementeUseCase.execute(newRequirement);
 
       return { pet };
     } catch (err: any) {

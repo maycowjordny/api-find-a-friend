@@ -8,5 +8,5 @@ export interface Address {
   postalCode: string;
   province: string;
   uf: string;
-  createdAt?: string | Date | undefined;
+  createdAt?: Date;
 }

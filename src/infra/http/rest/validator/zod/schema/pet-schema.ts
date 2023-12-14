@@ -29,5 +29,7 @@ export const petRegisterBodySchema = z.object({
   idependenceLevels: z.enum(petEnumIndependenceLevels),
   typeId: z.string().uuid(),
   toAdopt: z.boolean(),
+  pictures: z.array(z.string()),
+  requirements: z.array(z.string()),
   organizationId: z.string().uuid(),
 });

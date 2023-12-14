@@ -1,8 +1,14 @@
-import { Pet } from "@/application/interfaces/pet";
+import { GetPet, Pet, PetsToAdopt } from "@/application/interfaces/pet";
 import { PetsRepository } from "../repositories/pets-abstract";
 import { randomUUID } from "crypto";
 
 export class InMemoryPetRepository implements PetsRepository {
+  findById(id: string): Promise<Pet | null> {
+    throw new Error("Method not implemented.");
+  }
+  findManyNearby(data: GetPet): Promise<PetsToAdopt> {
+    throw new Error("Method not implemented.");
+  }
   public items: Pet[] = [];
   async create(data: Pet): Promise<Pet> {
     const pet = {
