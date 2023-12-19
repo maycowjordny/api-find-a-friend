@@ -16,11 +16,11 @@ const petEnumIndependenceLevels = Object.values(PetEnumIndependenceLevels) as [
 export const petGetRegisterBodySchema = z.object({
   take: z
     .string()
-    .default("1")
+    .default("100")
     .transform((val) => Number(val)),
   skip: z
     .string()
-    .default("100")
+    .default("1")
     .transform((val) => Number(val)),
   size: z.enum(petEnumSize).optional(),
   city: z.string(),

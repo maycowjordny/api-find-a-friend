@@ -13,7 +13,7 @@ export async function findPetById(
 
     const pets = await findPetByIdUseCase.execute(findPetByIdValidator);
 
-    return reply.status(201).send(pets);
+    return reply.status(200).send(pets);
   } catch (err: any) {
     return reply.status(500).send({ message: err.message });
   }

@@ -9,12 +9,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
     const registerUseCase = makeCreateUserUseCase();
 
-    const { user } = await registerUseCase.execute(userValidate);
-
-    reply.cookie("userId", user.id!, {
-      path: "/",
-      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
-    });
+    await registerUseCase.execute(userValidate);
 
     return reply.status(201).send({ message: "User created successfully!" });
   } catch (err) {

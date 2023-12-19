@@ -57,8 +57,8 @@ export class PrismaPetsRepository implements PetsRepository {
     });
 
     const page = {
-      skip: data.skip,
       take: data.take,
+      skip: data.skip,
       total: count,
     };
 

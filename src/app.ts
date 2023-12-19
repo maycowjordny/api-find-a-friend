@@ -1,10 +1,21 @@
 import fastify from "fastify";
 import { ZodError } from "zod";
 import { env } from "./config/env";
+import fastifyCookie from "@fastify/cookie";
 import { appRoutes } from "./infra/http/rest/routes/index-routes";
+import { fastifyJwt } from "@fastify/jwt";
 
 export const app = fastify();
+
+app.register(fastifyJwt, {
+  secret: env.JWT_SECRET,
+  sign: { expiresIn: "10m" },
+  cookie: { cookieName: "refresh-token", signed: false },
+});
+
+app.register(fastifyCookie);
 app.register(appRoutes);
+
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
     return reply

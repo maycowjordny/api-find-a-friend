@@ -1,10 +1,8 @@
-import { FastifyRequest } from "fastify";
 import { OrganizationValidator } from "../organization/organization-validator";
 import { Body } from "@/application/types/organization-types";
 
-export async function validateBody(userId: string, request: FastifyRequest) {
+export async function validateBody(body: Body, userId: string) {
   const organizationValidatorRepository = new OrganizationValidator();
-  const body = request.body as Body;
 
   const newBody = {
     userId,

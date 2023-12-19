@@ -1,20 +1,18 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { OrganizationValidator } from "../../validator/organization/organization-validator";
-import { Body } from "@/application/types/organization-types";
 import { Organization } from "@/application/interfaces/organization";
 import { makeCreateOrganizationUseCase } from "@/application/use-cases/factories/organization/make-organization-use-case";
 import { validateBody } from "../../validator/zod-factories/make-organization";
+import { Body } from "@/application/types/organization-types";
 
 export async function OrganizationRegister(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
   try {
-    const { userId } = request.cookies;
-
-    if (!userId) throw new Error("userId is not defined");
-
-    const organizationValidate = await validateBody(userId, request);
+    const organizationValidate = await validateBody(
+      request.body as Body,
+      request.user.sub
+    );
 
     const organizationUseCase = makeCreateOrganizationUseCase();
 

@@ -16,9 +16,11 @@ export async function petRegister(
 
     const petUseCase = makeCreatePetUseCase();
 
-    await petUseCase.execute(petValidator);
+    const { pet } = await petUseCase.execute(petValidator);
 
-    return reply.status(201).send({ message: "Pet created successfully!" });
+    return reply
+      .status(201)
+      .send({ message: "Pet created successfully!", petId: pet.id });
   } catch (err: any) {
     return reply.status(500).send({ message: err.message });
   }
