@@ -3,6 +3,7 @@ import { AuthenticateValidator } from "../../validator/authenticate/authenticate
 import { InvalidCredentialsError } from "@/application/errors/invalid-credentials-error";
 import { makeAuthenticateUseCase } from "@/application/use-cases/factories/authenticate/make-authenticate-use-case";
 import { User } from "@/application/interfaces/user";
+import { refreshToken } from "../refresh-token/refresh-token-controller";
 
 export async function authenticate(
   request: FastifyRequest,
@@ -14,7 +15,15 @@ export async function authenticate(
     const { user } = await registerUseCase.execute(authenticateValidator);
 
     const token = await jwtToken(user);
+    const refreshJwtToken = await refreshToken(user);
+
     return reply
+      .setCookie("refreshToken", refreshJwtToken, {
+        path: "/",
+        secure: true,
+        sameSite: true,
+        httpOnly: true,
+      })
       .status(200)
       .send({ message: "User successfully authenticated!", token });
   } catch (err) {
@@ -32,6 +41,19 @@ export async function authenticate(
       {
         sign: {
           sub: user.id,
+        },
+      }
+    );
+  }
+  async function refreshToken(user: User) {
+    return await reply.jwtSign(
+      {
+        role: user.role,
+      },
+      {
+        sign: {
+          sub: user.id,
+          expiresIn: "7d",
         },
       }
     );

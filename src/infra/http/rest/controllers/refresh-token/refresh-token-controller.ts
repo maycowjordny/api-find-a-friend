@@ -7,16 +7,20 @@ export async function refreshToken(
   try {
     await request.jwtVerify({ onlyCookie: true });
 
-    const token = jwtToken();
+    const token = await jwtToken();
     const refreshJwtToken = await refreshToken();
 
-    setTokenInCookies(refreshJwtToken);
-
     return reply
+      .setCookie("refreshToken", refreshJwtToken, {
+        path: "/",
+        secure: true,
+        sameSite: true,
+        httpOnly: true,
+      })
       .status(200)
       .send({ message: "Refresh Token Created Successfully!", token });
-  } catch (err) {
-    console.log(err);
+  } catch (err: any) {
+    return reply.status(400).send({ message: err.message });
   }
 
   async function jwtToken() {
@@ -31,7 +35,6 @@ export async function refreshToken(
       }
     );
   }
-
   async function refreshToken() {
     return await reply.jwtSign(
       {
@@ -44,14 +47,5 @@ export async function refreshToken(
         },
       }
     );
-  }
-
-  async function setTokenInCookies(refreshtoken: string) {
-    return reply.setCookie("refreshToken", refreshtoken, {
-      path: "/",
-      secure: true,
-      sameSite: true,
-      httpOnly: true,
-    });
   }
 }
