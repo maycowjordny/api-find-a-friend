@@ -1,11 +1,6 @@
 import { PetsRepository } from "../../repositories/pets-abstract";
 import { prisma } from "../../lib/prisma";
-import {
-  Pet,
-  GetPet,
-  Pagination,
-  PetsToAdopt,
-} from "@/application/interfaces/pet";
+import { Pet, GetPet, PetsToAdopt } from "@/application/interfaces/pet";
 import { convertToDomain, convertToPrisma } from "../mapper/pet-mapper";
 
 import { findManyconvertToDomain } from "../mapper/get-pet-mapper";
