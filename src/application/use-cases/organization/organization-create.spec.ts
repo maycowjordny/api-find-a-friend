@@ -17,7 +17,6 @@ describe("Organization Use Case", () => {
   });
 
   const address = {
-    id: randomUUID(),
     postalCode: "99999999",
     uf: "uf",
     country: "country",
@@ -33,9 +32,7 @@ describe("Organization Use Case", () => {
       "@/application/use-cases/factories/organization/make-organization-use-case",
       () => ({
         makeCreateAddressUseCase: vi.fn(() => ({
-          execute: vi.fn(() => ({
-            address: { id: "95a63f2f-73d8-4210-8335-827ce2b75164" },
-          })),
+          execute: vi.fn(),
         })),
       })
     );
@@ -52,7 +49,6 @@ describe("Organization Use Case", () => {
     );
 
     expect(organization).toMatchObject({
-      addressId: "95a63f2f-73d8-4210-8335-827ce2b75164",
       userId: expect.any(String),
       name: mockOrganization.name,
       phone: mockOrganization.phone,
