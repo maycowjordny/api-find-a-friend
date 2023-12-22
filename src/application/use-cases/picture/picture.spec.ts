@@ -6,7 +6,7 @@ import { PictureInMemory } from "@/infra/database/in-memory-repository/in-memory
 let pictureInMmemoryRepository: PictureInMemory;
 let pictureUseCase: PictureUseCase;
 
-describe("Find pet by Id Use Case", () => {
+describe("Picture Use Case", () => {
   beforeEach(() => {
     pictureInMmemoryRepository = new PictureInMemory();
     pictureUseCase = new PictureUseCase(pictureInMmemoryRepository);

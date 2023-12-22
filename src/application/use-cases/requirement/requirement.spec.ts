@@ -6,7 +6,7 @@ import { randomUUID } from "node:crypto";
 let requirementInMmemoryRepository: RequirementInMemory;
 let requirementUseCase: RequirementUseCase;
 
-describe("Find pet by Id Use Case", () => {
+describe("Requirement Use Case", () => {
   beforeEach(() => {
     requirementInMmemoryRepository = new RequirementInMemory();
     requirementUseCase = new RequirementUseCase(requirementInMmemoryRepository);
