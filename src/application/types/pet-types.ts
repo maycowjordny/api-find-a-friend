@@ -37,5 +37,5 @@ export type GetPetUseCaseRequest = {
 };
 
 export type GetPetUseCaseResponse = {
-  pets: PetsToAdopt;
+  pet: PetsToAdopt;
 };

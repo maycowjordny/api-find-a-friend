@@ -37,7 +37,6 @@ describe("organization test (e2e)", () => {
         country: "Brasil",
         lat: "-3.7931392",
         lng: "-38.6020164",
-        nameAddress: "Fortaleza",
         neighbourhood: "Fortaleza",
         postalCode: "63010010",
         province: "Ceara",

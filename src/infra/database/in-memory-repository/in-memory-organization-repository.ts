@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { OrganizationsRepositoryAbstract } from "../repositories/organizations-abstract";
 import { Organization } from "@prisma/client";
 
@@ -8,12 +9,12 @@ export class InMemoryOrganizationRepository
 
   async create(data: Organization): Promise<Organization> {
     const organization = {
-      id: data.id,
-      name: data.name,
+      id: randomUUID(),
       userId: data.userId,
-      phone: data.phone,
       addressId: data.addressId,
-      createdAt: data.createdAt,
+      name: data.name,
+      phone: data.phone,
+      createdAt: new Date(),
     };
 
     this.items.push(organization);

@@ -1,7 +1,7 @@
 import { PrismaPetsRepository } from "@/infra/database/prisma/repositories/prisma-pets-repository";
 import { PetRegisterUseCase } from "../../pet/pet-create";
 import { GetPetUseCase } from "../../pet/pet-get";
-import { FindPetByIdUseCase } from "../../pet/find-many-by-id";
+import { FindPetByIdUseCase } from "../../pet/find-pet-by-id";
 
 export function makeCreatePetUseCase() {
   const petRepository = new PrismaPetsRepository();

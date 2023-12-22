@@ -3,11 +3,13 @@ export enum PetEnumSize {
   MEDIUM = "MEDIUM",
   LARGE = "LARGE",
 }
+
 export enum PetEnumEnergyLevels {
   LOW = "LOW",
   MEDIUM = "MEDIUM",
   HIGH = "HIGH",
 }
+
 export enum PetEnumIndependenceLevels {
   LOW = "LOW",
   MEDIUM = "MEDIUM",

@@ -4,7 +4,11 @@ import { PetsRepository } from "@/infra/database/repositories/pets-abstract";
 export class FindPetByIdUseCase {
   constructor(private petsRepository: PetsRepository) {}
   async execute(data: FindByidUseCaseRequest) {
-    const pet = await this.petsRepository.findById(data.id);
-    return pet;
+    try {
+      const pet = await this.petsRepository.findById(data.id);
+      return pet;
+    } catch (err: any) {
+      throw new Error(`Cannot find pet by id with error: ${err.message}`);
+    }
   }
 }
