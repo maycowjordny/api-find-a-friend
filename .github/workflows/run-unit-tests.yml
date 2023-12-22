@@ -6,6 +6,8 @@ jobs:
   run-unit-tests:
     name: Run Unit Tests
     runs-on: ubuntu-latest
+    env:
+      JWT_SECRET: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v3
@@ -16,5 +18,4 @@ jobs:
           cache: "npm"
 
       - run: npm ci
-
       - run: npm run test
