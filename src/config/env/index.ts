@@ -6,7 +6,6 @@ const envSchema = z.object({
   JWT_SECRET: z.string(),
   PORT: z.coerce.number().default(3333),
 });
-
 const _env = envSchema.safeParse(process.env);
 
 if (_env.success == false) {
