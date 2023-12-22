@@ -1,5 +1,6 @@
 import { RequirementUseCaseRequest } from "@/application/types/requirement-types";
 import { RequirementRepositoryAbstract } from "@/infra/database/repositories/requirement-abstract";
+import { vi } from "vitest";
 
 export class RequirementUseCase {
   constructor(private requirementRepository: RequirementRepositoryAbstract) {}

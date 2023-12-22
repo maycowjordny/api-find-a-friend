@@ -12,7 +12,7 @@ import {
 let petInMemoryRepository: InMemoryPetRepository;
 let petCreateUseCase: PetRegisterUseCase;
 
-describe("Organization Use Case", () => {
+describe("Pet Create Use Case", () => {
   const mockRepositoryPet = {
     create: vi.fn(),
     findById: vi.fn(),

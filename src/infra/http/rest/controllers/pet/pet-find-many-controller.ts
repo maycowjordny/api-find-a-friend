@@ -11,9 +11,9 @@ export async function findManyPet(
 
     const findManyPetUseCase = makefindManyPetUseCase();
 
-    const { pets } = await findManyPetUseCase.execute(petGetValidator);
+    const { pet } = await findManyPetUseCase.execute(petGetValidator);
 
-    return reply.status(200).send(pets);
+    return reply.status(200).send(pet);
   } catch (err: any) {
     return reply.status(500).send({ message: err.message });
   }
