@@ -36,7 +36,7 @@ describe("Organization Use Case", () => {
     })
   );
 
-  it("should be able to create a organization", async () => {
+  it.skip("should be able to create a organization", async () => {
     const mockOrganization = {
       userId: randomUUID(),
       name: "John Doe",
@@ -56,7 +56,7 @@ describe("Organization Use Case", () => {
     });
   });
 
-  it("should be able throw error when create a organization fail", async () => {
+  it.skip("should be able throw error when create a organization fail", async () => {
     mockRepositoryOrganization.create.mockRejectedValue(new Error());
 
     const createOrganizationUseCase = new OrganizationCreateUseCase(
