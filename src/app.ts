@@ -13,6 +13,8 @@ app.register(fastifyJwt, {
   cookie: { cookieName: "refreshToken", signed: false },
 });
 
+console.log(env.JWT_SECRET);
+
 app.register(fastifyCookie);
 app.register(appRoutes);
 
