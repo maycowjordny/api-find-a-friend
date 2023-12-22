@@ -29,6 +29,17 @@ describe("Organization Use Case", () => {
   };
 
   it("should be able to create a organization", async () => {
+    vi.mock(
+      "@/application/use-cases/factories/organization/make-organization-use-case",
+      () => ({
+        makeCreateAddressUseCase: vi.fn(() => ({
+          execute: vi.fn(() => ({
+            address: { id: "95a63f2f-73d8-4210-8335-827ce2b75164" },
+          })),
+        })),
+      })
+    );
+
     const mockOrganization = {
       userId: randomUUID(),
       name: "John Doe",
