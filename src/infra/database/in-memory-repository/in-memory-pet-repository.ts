@@ -24,19 +24,21 @@ export class InMemoryPetRepository implements PetsRepository {
         : true;
     });
 
-    const total = filteredPets.length;
-    const skip = (data.skip - 1) * data.take;
-    const take = data.take;
-    const paginationPets = filteredPets.slice(skip, skip + take);
+    const count = filteredPets.length;
+
+    const paginatedPets = filteredPets.slice(
+      (data.skip - 1) * data.take,
+      data.skip * data.take
+    );
+
     const pagination = {
-      take,
-      skip,
-      total,
+      skip: data.skip,
+      take: data.take,
+      total: count,
     };
 
-    return { pets: paginationPets, pagination };
+    return { pets: paginatedPets, pagination };
   }
-
   async create(data: Pet): Promise<Pet> {
     const pet = {
       id: randomUUID(),
@@ -44,8 +46,8 @@ export class InMemoryPetRepository implements PetsRepository {
       description: data.description,
       age: data.age,
       energyLevels: data.energyLevels,
-      typeId: randomUUID(),
-      organizationId: randomUUID(),
+      typeId: data.typeId ?? randomUUID(),
+      organizationId: data.organizationId ?? randomUUID(),
       size: data.size,
       environment: data.environment,
       toAdopt: data.toAdopt,
