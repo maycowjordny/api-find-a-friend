@@ -42,7 +42,6 @@ describe("Create Organization Use Case ", async () => {
       phone: "99 999999999",
       address: address,
     });
-    console.log(organization);
 
     const RESPONSE_OBJECT_MESSAGE = {
       id: expect.any(String),

@@ -16,7 +16,7 @@ describe("Address Use Case", () => {
   });
 
   it("should be able to create a address", async () => {
-    const address = await addressUseCase.execute({
+    const { address } = await addressUseCase.execute({
       city: "Fortaleza",
       country: "Brasil",
       lat: "-3.7931392",
