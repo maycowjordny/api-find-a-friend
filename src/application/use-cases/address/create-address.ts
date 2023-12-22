@@ -27,7 +27,7 @@ export class AddressCreateUseCase {
         uf,
       });
 
-      return address;
+      return { address };
     } catch (err: any) {
       throw new Error(`Cannot create address with error: ${err.message}`);
     }

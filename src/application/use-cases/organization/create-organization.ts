@@ -5,6 +5,7 @@ import {
 import { PrismaAddressRepository } from "@/infra/database/prisma/repositories/prisma-address-repository";
 import { OrganizationsRepositoryAbstract } from "@/infra/database/repositories/organizations-abstract";
 import { AddressCreateUseCase } from "../address/create-address";
+import { makeAddressUseCase } from "../factories/address/make-create-address";
 
 export class OrganizationCreateUseCase {
   constructor(
@@ -15,11 +16,8 @@ export class OrganizationCreateUseCase {
   ): Promise<OrganizationRegisterUseCaseResponse> {
     try {
       const { name, phone, userId } = body;
-
-      const addressRepository = new PrismaAddressRepository();
-      const addressUseCase = new AddressCreateUseCase(addressRepository);
-
-      const address = await addressUseCase.execute(body.address);
+      const addressUseCase = makeAddressUseCase();
+      const { address } = await addressUseCase.execute(body.address);
 
       const organization = await this.organizationRepository.create({
         addressId: address.id!,
